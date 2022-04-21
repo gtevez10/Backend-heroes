@@ -25,7 +25,10 @@ class Server {
     middlewares(){
 
         //CORS
-        this.app.use( cors() )
+        this.app.use( cors() );
+
+        //Lectura y parseo del body, cualquier peticion PUT POST DELETE la va a convertir a un formato JSON 
+        this.app.use( express.json());
 
         //Directorio Publico
         this.app.use( express.static( 'public' ) );

@@ -5,8 +5,8 @@ const router = Router();
 
 router.get('/', mutantesGet );
 
-//PUT Actualizar
-router.put('/', mutantesPut);
+//PUT Actualizar :id es dinamico 
+router.put('/:id', mutantesPut);
 
 //POST Crear nuevo 
 
