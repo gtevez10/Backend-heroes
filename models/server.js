@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 
 
@@ -7,6 +8,7 @@ class Server {
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+        this.mutantesPath = '/api/mutantes';
 
         //Middleware
         this.middlewares();
@@ -16,39 +18,14 @@ class Server {
 
     routes() {
 
-        this.app.get('/prueba', (req, res ) => {
-            res.json({
-                
-                msg: 'GET api ',
-                
-            });
-        });
-        //PUT Actualizar
-        this.app.put('/prueba', (req, res ) => {
-            res.json({
-
-                ok:'PUT api ',
-            });
-        });
-
-        //POST Crear nuevo 
-        this.app.post('/prueba', (req, res ) => {
-            res.json({
-                
-                msg: 'POST api ',
-
-            });
-        });
-
-        this.app.delete('/prueba', (req, res ) => {
-            res.json({
-                
-                msg: 'DELETE api ',
-            });
-        });
+        this.app.use( this.mutantesPath , require('../routes/mutantes.route'));
+        
     }
 
     middlewares(){
+
+        //CORS
+        this.app.use( cors() )
 
         //Directorio Publico
         this.app.use( express.static( 'public' ) );
