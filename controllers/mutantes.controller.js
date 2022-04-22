@@ -1,5 +1,5 @@
 const { response, request } = require('express'); // para obtener el tipado de res.
-
+const Mutante = require('../models/mutante'); // Mutante con Mayuscula ya que me va permitir crear instancias de esta, es un estandar no obligacion
 
 const mutantesGet = (req = request , res = response  ) => {
     
@@ -22,13 +22,15 @@ const mutantesPut = (req, res = response ) => {
     });
 };
 
-const mutantesPost = (req, res = response ) => {
+const mutantesPost = async(req, res = response ) => {
 
-    const body = req.body;
+    const {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo} = req.body;
+    const mutante = new Mutante( {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo}); //Creacion de la instancia, no guarda en la BD aun...
+
+    await mutante.save(); //Aqui si graba en la BD 
     res.json({
-        
-        msg: 'POST api - CONTROLADOR ',
-        body
+
+        mutante
     });
 };
 
