@@ -28,13 +28,14 @@ const MutanteSchema = Schema({
 
         type: String,
         required: [true, 'El super poder es obligatorio'],
-        enum: [ 'Magicos','Mental','Fuerza','Velocidad','Resistencia']
+        
     },
 
     vehiculo: {
 
         type: String,
-        required: [true, 'Saber el vehiculo  es obligatorio']
+        required: [true, 'Saber el vehiculo  es obligatorio'],
+        enum: [ 'Terreste','Aereo','No necesita']
     },
     img: {
 
