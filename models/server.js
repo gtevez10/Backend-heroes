@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { dbConnection } = require('../databases/config.db');
 
 
 
@@ -10,10 +11,18 @@ class Server {
         this.port = process.env.PORT;
         this.mutantesPath = '/api/mutantes';
 
+        //Conectar a base de datos
+
+        this.conectarDB();
+
         //Middleware
         this.middlewares();
         
         this.routes();
+    }
+
+    async conectarDB(){
+        await dbConnection();
     }
 
     routes() {
