@@ -29,15 +29,6 @@ const mutantesPost = async( req, res = response ) => {
     const {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo} = req.body;
     const mutante = new Mutante( {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo}); //Creacion de la instancia, no guarda en la BD aun...
     
-    const existeMutante = await Mutante.findOne({ nombre });
-
-    if( existeMutante ){
-
-        return res.status(400).json({
-            Error: `El mutante ${ nombre } ya esta registrado` 
-
-        })
-    }
     
 
     await mutante.save(); //Aqui si graba en la BD 

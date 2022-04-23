@@ -35,7 +35,7 @@ const MutanteSchema = Schema({
 
         type: String,
         required: [true, 'Saber el vehiculo  es obligatorio'],
-        enum: [ 'Terreste','Aereo','No necesita']
+        enum: [ 'Terrestre','Aereo','No necesita']
     },
     img: {
 
@@ -48,6 +48,13 @@ const MutanteSchema = Schema({
     },
 
 });
+
+MutanteSchema.methods.toJSON = function(){ // Para remover el __v creado por la Base de datos y enviar la respuesta sin el __v
+    const { __v, ...mutante } = this.toObject();
+    return mutante;
+
+
+};
 
 
 module.exports = model('Mutante', MutanteSchema ); // para exportar el esquema lo hago con la funcion model()
