@@ -12,13 +12,22 @@ const mutantesGet = (req = request , res = response  ) => {
     });
 };
 
-const mutantesPut = (req, res = response ) => {
+const mutantesPut = async(req, res = response ) => {
 
     const id = req.params.id;
+    const { __v, _id, ...mutante } = req.body; // De las peticion en el body extraigo las propiedades del mutante que necesito (todas menos __v )
+
+    //Actualizacion de Mutante 
+
+    const mutanteUpdate = await Mutante.findByIdAndUpdate( id, mutante, {new: true} ); // 
+
+    console.log(mutanteUpdate)
+
     res.json({
 
         ok:'PUT api - CONTROLADOR ',
         id,
+        mutanteUpdate,
     });
 };
 
