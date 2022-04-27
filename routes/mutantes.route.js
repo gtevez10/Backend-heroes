@@ -47,7 +47,13 @@ router.post('/', [
 ] , mutantesPost );
 
 //DELETE Eliminar Mutante
-router.delete('/', mutantesDelete);
+router.delete('/:id',[
+    check('id','No es un id valido').isMongoId(),
+    check('id').custom( validarId ),
+
+
+    validarCampos
+], mutantesDelete);
 
 
 

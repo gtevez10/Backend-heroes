@@ -4,6 +4,7 @@ const Mutante = require('../models/mutante'); // Mutante con Mayuscula ya que me
 const mutantesGet = async(req = request , res = response  ) => {
     const { limit = 5, from = 0}  = req.query;
     const  estadoActivo = { estado: true };
+ 
 
     // (codigo Promise.all )
     /*const mutantesInfo = await Mutante.find( estadoActivo ) // Busca los mutantes que tenga su estado: true ya que esto significa que no han sido eliminados ( Se manejara un DELETE de tipo que no se borrara el Mutante directamente de la base de datos, sino que se maneja por estados)  
@@ -42,8 +43,6 @@ const mutantesPut = async(req, res = response ) => {
 
 const mutantesPost = async( req, res = response ) => {
 
-   
-
     const {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo} = req.body;
     const mutante = new Mutante( {nombre, grupo, condicion, lugarDeOperacion, superPoder, vehiculo}); //Creacion de la instancia, no guarda en la BD aun...
     
@@ -57,11 +56,17 @@ const mutantesPost = async( req, res = response ) => {
     });
 };
 
-const mutantesDelete = (req, res = response ) => {
-    res.json({
-        
-        msg: 'DELETE api - CONTROLADOR ',
-    });
+const mutantesDelete = async(req, res = response ) => {
+
+    const { id } = req.params;
+    const estadoEliminado = { estado: false };
+
+    //const mutanteDelete = await Mutante.findByIdAndDelete( id ); //Eliminar fisicamente de mi BD (No se recomienda)
+
+    const mutanteDelete = await Mutante.findByIdAndUpdate( id, estadoEliminado,{new: true} );
+ 
+
+    res.json({ mutanteDelete });
 };
 
 

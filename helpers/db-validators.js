@@ -37,6 +37,9 @@ const mutanteExiste = async ( nombre = '' ) =>{ // Recibo la propiedad exacta de
 
 const validarId = async ( id ) =>{ // Valida si el id del mutante que se quiere actualizar existe o no.
 
+    if ( !mongoose.Types.ObjectId.isValid(id) ) { // Esta validacion la hago para evitar que mongo me devuelva su error personal, donde muestra algunas rutas de mi proyecto, y por seguridad no quiero eso.
+        throw new Error(`El id:${ id } no es un tipo valido en la base de datos`);
+    }
 
     const existeId = await Mutante.findById( id );
     if( !existeId ){
