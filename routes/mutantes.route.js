@@ -9,7 +9,12 @@ const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
  
-router.get('/', mutantesGet );
+router.get('/', [
+    check('limit', 'El query limit debe ser numerico').optional().isNumeric(),
+    check('from', 'El query from debe ser numerico').optional().isNumeric(),
+
+    
+],mutantesGet );
 
 //PUT Actualizar :id es dinamico 
 router.put('/:id', [
