@@ -2,7 +2,7 @@ const { response, request } = require('express'); // para obtener el tipado de r
 const Mutante = require('../models/mutante'); // Mutante con Mayuscula ya que me va permitir crear instancias de esta, es un estandar no obligacion
 
 const mutantesGet = async(req = request , res = response  ) => {
-    const { limit = 5, from = 0}  = req.query;
+    const { limit = 100, from = 0}  = req.query;
     const  estadoActivo = { estado: true };
  
 
