@@ -29,9 +29,7 @@ class Server {
     routes() {
 
         this.app.use( this.mutantesPath , require('../routes/mutantes.route'));
-
-        
-        
+       
     }
 
     middlewares(){
@@ -47,11 +45,7 @@ class Server {
 
         
         
-        this.app.get('*', ( req, res ) => {
-
-            res.sendFile(path.resolve('public/index.html')); 
-        });
-
+       
          
     }
 
