@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../databases/config.db');
+const path = require('path');
 
 
 
@@ -28,6 +29,7 @@ class Server {
     routes() {
 
         this.app.use( this.mutantesPath , require('../routes/mutantes.route'));
+
         
         
     }
@@ -42,6 +44,15 @@ class Server {
 
         //Directorio Publico
         this.app.use( express.static( 'public' ) );
+
+        
+        
+        this.app.get('*', ( req, res ) => {
+
+            res.sendFile(path.resolve('public/index.html')); 
+        });
+
+         
     }
 
     listen() {
