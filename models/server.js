@@ -29,6 +29,7 @@ class Server {
 
         this.app.use( this.mutantesPath , require('../routes/mutantes.route'));
         
+        
     }
 
     middlewares(){
